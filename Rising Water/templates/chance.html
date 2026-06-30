@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - Warning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">🌊 Floods Prediction</div>
+    <div class="nav-links"><a href="/">Home</a></div>
+</div>
+
+<div class="content-wrapper" style="margin-top: 40px;">
+    <div class="card" style="text-align: center;">
+        <div class="result-display danger">
+            <div class="status-icon">🚨</div>
+            <h2 style="color: #ef4444; margin-bottom: 0.5rem;">CRITICAL FLOOD RISK DETECTED</h2>
+            <p style="text-align: center; color: #fca5a5; margin: 0;">The data trends match historical parameters indicating a high risk of localized flooding.</p>
+        </div>
+        <p style="text-align: center; margin-bottom: 2rem;">Precipitation and atmospheric metrics indicate unstable thresholds. Early monitoring precautions should be verified.</p>
+        <a href="/predict" class="btn" style="background-color: #475569; color: white;">Run New Evaluation</a>
+    </div>
+</div>
+
+</body>
+</html>

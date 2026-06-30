@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - Normal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">🌊 Floods Prediction</div>
+    <div class="nav-links"><a href="/">Home</a></div>
+</div>
+
+<div class="content-wrapper" style="margin-top: 40px;">
+    <div class="card" style="text-align: center;">
+        <div class="result-display safe">
+            <div class="status-icon">🛡️</div>
+            <h2 style="color: #10b981; margin-bottom: 0.5rem;">ENVIRONMENTAL STATUS SECURE</h2>
+            <p style="text-align: center; color: #6ee7b7; margin: 0;">Atmospheric thresholds match historical non-flood safety indicators.</p>
+        </div>
+        <p style="text-align: center; margin-bottom: 2rem;">No extreme rainfall combinations or risk indicators were triggered. Conditions remain stable.</p>
+        <a href="/predict" class="btn">Run New Evaluation</a>
+    </div>
+</div>
+
+</body>
+</html>
