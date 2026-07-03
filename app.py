@@ -1,50 +1,61 @@
 from flask import Flask, render_template, request
-# Import load from joblib to load the saved model file
 from joblib import load
 import numpy as np
+import os
 
-# Create Flask app and Load our model file.
-app = Flask(__name__) # our flask app
+# Create Flask App
+app = Flask(__name__)
 
-# Load model assets
-model = load('floods.save')
-sc = load('transform.save')
+# Load Model and Scaler
+model = load("floods.save")
+sc = load("transform.save")
 
-@app.route('/') # rendering the html template
+
+# Home Page
+@app.route("/")
 def home():
-    return render_template('home.html')
+    return render_template("home.html")
 
-@app.route('/predict') # rendering the html template
+
+# Prediction Page
+@app.route("/predict")
 def index():
     return render_template("index.html")
 
-@app.route('/submit', methods=['POST'])
+
+# Prediction Logic
+@app.route("/submit", methods=["POST"])
 def predict():
-    if request.method == 'POST':
-        # 1. Capṇture the 5 weather parameters from the form inputs
+
+    try:
         features = [
-            float(request.form['v1']),
-            float(request.form['v2']),
-            float(request.form['v3']),
-            float(request.form['v4']),
-            float(request.form['v5'])
+            float(request.form["v1"]),
+            float(request.form["v2"]),
+            float(request.form["v3"]),
+            float(request.form["v4"]),
+            float(request.form["v5"])
         ]
-        
-        # 2. Structure as a 2D array and apply the saved StandardScaler (sc)
-        final_features = [np.array(features)]
+
+        # Convert to NumPy array
+        final_features = np.array([features])
+
+        # Scale the input
         scaled_features = sc.transform(final_features)
-        
-        # 3. Pass features to the saved XGBoost model
+
+        # Predict
         prediction = model.predict(scaled_features)
-        
-        # 4. Redirect the user to the appropriate result page based on output
-        if prediction >= 1:
-            return render_template('chance.html')
+
+        # Display Result
+        if prediction[0] >= 1:
+            return render_template("chance.html")
         else:
-            return render_template('no_chance.html')
-from flask import Flask
+            return render_template("no_chance.html")
 
-app = Flask(__name__)
+    except Exception as e:
+        return f"Error: {e}"
 
+
+# Run Flask App
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=False)
