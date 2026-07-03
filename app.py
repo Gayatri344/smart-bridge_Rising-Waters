@@ -42,6 +42,9 @@ def predict():
             return render_template('chance.html')
         else:
             return render_template('no_chance.html')
+from flask import Flask
 
-if __name__ == '__main__':
-    app.run(debug=True)
+app = Flask(__name__)
+
+if __name__ == "__main__":
+    app.run()
